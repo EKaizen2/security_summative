@@ -6,13 +6,13 @@ try:
    chr = chr
 except NameError:
    pass
-p=int(input("Enter a prime number (17, 19, 23, etc): "))
-q=int(input("Enter another prime number (Not one you entered above): "))
+p=int(input("Enter a one prime number eg 17, 19, 23, etc: "))
+q=int(input("Enter another prime number but not one you entered above: "))
 print("Choosen primes:\np=" + str(p) + ", q=" + str(q) + "\n")
 n=p*q
-print("n = p * q = " + str(n) + "\n")
+print("n = " + str(n) + "\n")
 phi=(p-1)*(q-1)
-print("Euler's function (totient) [phi(n)]: " + str(phi) + "\n")
+# print("Euler's function (totient) [phi(n)]: " + str(phi) + "\n")
 def gcd(a, b):
     while b != 0:
         c = a % b
@@ -33,12 +33,12 @@ def coprimes(a):
         if x == modinv(x,phi):
             l.remove(x)
     return l
-print("Choose an e from a below coprimes array:\n")
+print("Please select your e from the array below:\n")
 print(str(coprimes(phi)) + "\n")
 e=int(input())
 d=modinv(e,phi)
-print("\nYour public key is a pair of numbers (e=" + str(e) + ", n=" + str(n) + ").\n")
-print("Your private key is a pair of numbers (d=" + str(d) + ", n=" + str(n) + ").\n")
+print("\nHere are your public keys (e=" + str(e) + ", n=" + str(n) + ").\n")
+print("Here are your private keys (d=" + str(d) + ", n=" + str(n) + ").\n")
 def encrypt_block(m):
     c = modinv(m**e, n)
     if c == None: print('No modular multiplicative inverse for block ' + str(m) + '.')
@@ -51,9 +51,9 @@ def encrypt_string(s):
     return ''.join([chr(encrypt_block(ord(x))) for x in list(s)])
 def decrypt_string(s):
     return ''.join([chr(decrypt_block(ord(x))) for x in list(s)])
-s = input("Enter a message to encrypt: ")
-print("\nPlain message: " + s + "\n")
+s = input("Enter the message you would like to encrypt: ")
+print("\nHere is your plain message: " + s + "\n")
 enc = encrypt_string(s)
-print("Encrypted message: " + enc + "\n")
+print("Here is your encrypted message: " + enc + "\n")
 dec = decrypt_string(enc)
-print("Decrypted message: " + dec + "\n")
+print("Here is your decrypted message: " + dec + "\n")
